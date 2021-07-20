@@ -4,7 +4,7 @@ import model.Wallet;
 
 public class Vista {
     
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
         Wallet wallet1 = new Wallet(true);
         Wallet wallet2 = new Wallet(false);
         
@@ -16,5 +16,7 @@ public class Vista {
         System.out.println(saldo2);
         // System.out.println(wallet2.getSaldo());
         System.out.println(wallet2.retirarSaldo(200000));
+        wallet2.displayExtractos();
+
     }
 }

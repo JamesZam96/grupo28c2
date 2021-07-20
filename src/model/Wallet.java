@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Wallet {
 
 
@@ -11,11 +13,15 @@ public class Wallet {
     private boolean tieneLimite;
     private int meta;
 
+    //Lista de transacciones de la wallet
+    private ArrayList<Transaction> transactions;
+
     public Wallet(boolean limite) {
         super();
         saldo = 0;
         tieneLimite = limite;
         meta = 0;
+        transactions = new ArrayList<>();
     }
 
 
@@ -30,6 +36,8 @@ public class Wallet {
             return "No puede superar el limite";
             }
         saldo += valor;
+        Transaction transaction= new Transaction(valor, "hoy", 1);
+        transactions.add(transaction);
         if (verificarMeta()){System.out.println("Has superado la meta!");}
         return "Operacion exitosa " + saldo;
     }
@@ -46,6 +54,8 @@ public class Wallet {
             return "Solo se retiro: " + saldoTemp;
         }
         saldo -= valor;
+        Transaction transaction= new Transaction(valor, "hoy", 2);
+        transactions.add(transaction);
         return "Retiro exitoso, su saldo es: " + saldo;
     }
 
@@ -75,4 +85,36 @@ public class Wallet {
         return false;
     }
 
+    public String breakLimite(){
+        if (!tieneLimite){
+            return "Error. Su cuenta es sin limites";
+        }
+
+        if (saldo < 10000){
+            return "Error. Romper el limite tiene un costo de 10000, usted tiene: "+saldo;
+        }
+        saldo-=10000;
+        tieneLimite = false;
+        return "Operacion exitosa. Su cuenta es ahora sin limites, nuevo saldo: "+saldo;
+    }
+
+    public String compararBilleteras(Wallet otraWallet){
+        if (saldo > otraWallet.getSaldo()){
+            return "Tienes mas saldo!";
+        }
+
+        else if (saldo == otraWallet.getSaldo()){
+            return "Ambos saldos son iguales";
+        }else {
+            return "Tienes menos saldo :(";
+        }
+
+    }
+
+
+    public void displayExtractos(){
+        for (Transaction transaction:transactions){
+            System.out.println(transaction);
+        }
+    }
 }
