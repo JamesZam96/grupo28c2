@@ -1,6 +1,9 @@
 package model;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Wallet {
 
@@ -30,11 +33,14 @@ public class Wallet {
     }
 
 
-    public String putSaldo(int valor){
+    public String putSaldo(int valor) throws Exception{
 
         if (saldo+valor>LIMITE_BILLETERA && tieneLimite){
-            return "No puede superar el limite";
+            throw new Exception("No puede superar el limite");
             }
+        
+        if (saldo+valor < 0){throw new Exception("Dato incorrecto");}
+        else if (saldo+valor > 0){throw new Exception("Dato correcto");}
         saldo += valor;
         Transaction transaction= new Transaction(valor, "hoy", 1);
         transactions.add(transaction);
@@ -53,6 +59,7 @@ public class Wallet {
             saldo = 0;
             return "Solo se retiro: " + saldoTemp;
         }
+        
         saldo -= valor;
         Transaction transaction= new Transaction(valor, "hoy", 2);
         transactions.add(transaction);
@@ -116,5 +123,19 @@ public class Wallet {
         for (Transaction transaction:transactions){
             System.out.println(transaction);
         }
+    }
+
+    public void generarRegistros(){
+        try {
+            OutputStream ous = new FileOutputStream("./src/model/trans.properties");
+            Properties prop = new Properties();
+            for (Transaction transaction:transactions){
+                prop.setProperty("Transaction", ""+transaction);
+                prop.store(ous, null);
+        }
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        
     }
 }

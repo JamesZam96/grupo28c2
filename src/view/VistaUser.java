@@ -11,10 +11,10 @@ public class VistaUser {
 
         System.out.println(owner1.getNombre());
         System.out.println(owner2.getNombre());
-        owner1.getWallet().putSaldo(3000000);
+        // owner1.getWallet().putSaldo(3000000);
 
         Company empresa = new Company("Nestle");
-        String response = empresa.myWallet().putSaldo(10000000);
-        System.out.println(response);
+        // String response = empresa.myWallet().putSaldo(10000000);
+        // System.out.println(response);
     }
 }
