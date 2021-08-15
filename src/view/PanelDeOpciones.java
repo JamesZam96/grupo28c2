@@ -51,6 +51,20 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
         add(btnAgregar);
     }
 
+    public void agregarCliente() {
+        String nombre = JOptionPane.showInputDialog("Digite el nombre del cliente");
+            if (nombre != null && !nombre.equalsIgnoreCase("")){
+                if (interfaz.addOwner(nombre)){
+                    JOptionPane.showMessageDialog(interfaz, "Se agrego el usuario");
+                }
+                else{
+                    JOptionPane.showMessageDialog(interfaz, "No se pudo agregar el usuario");
+                }
+            }
+            else{
+                    JOptionPane.showMessageDialog(interfaz, "Revisa los datos");
+            }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -62,19 +76,7 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
             System.out.println("cargar");
         }
         else if (e.getActionCommand().equals(btnAgregar.getActionCommand())){
-            String nombre = JOptionPane.showInputDialog("Digite el nombre del cliente");
-            if (nombre != null && !nombre.equalsIgnoreCase("")){
-                if (interfaz.addOwner(nombre)){
-                    JOptionPane.showMessageDialog(interfaz, "Se agrego el usuario");
-                }
-                else{
-                    JOptionPane.showMessageDialog(interfaz, "No se pudo agregar el usuario");
-                }
-            }
-            else{
-                    JOptionPane.showMessageDialog(interfaz, "Debes digitar el nombre");
-            }
-            
+            agregarCliente();
         }
     }
 
