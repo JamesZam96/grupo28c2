@@ -25,4 +25,13 @@ import java.util.ArrayList;
         owners.add(cliente);
         return true;
     }
+
+    public String listarOwners() {
+        String listado = "";
+        for (Owner owner : owners) {
+            listado += owner + "\n";
+        }
+
+        return listado;
+    }
 }

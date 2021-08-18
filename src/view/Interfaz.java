@@ -10,6 +10,7 @@ public class Interfaz extends JFrame{
 
     private PanelDeOpciones panelOpciones;
     private Controlador control;
+    private PanelOwners panelOwners;
 
     public Interfaz() {
         super();
@@ -22,18 +23,22 @@ public class Interfaz extends JFrame{
         //inicializar
         panelOpciones = new PanelDeOpciones(this);
         control  = new Controlador();
+        panelOwners = new PanelOwners(this);
 
         //modificar las propiedades
 
         //agregar
         add(panelOpciones, BorderLayout.SOUTH);
+        add(panelOwners,BorderLayout.WEST);
     }
 
     public boolean addOwner(String nombre) {
         return control.addOwner(nombre);
     }
 
-
+    public String listarOwners(){
+        return control.listarOwners();
+    }
     
 public static void main(String[] args) {
     Interfaz inter = new Interfaz();

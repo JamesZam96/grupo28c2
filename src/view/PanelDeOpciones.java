@@ -14,11 +14,13 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
     public static final String BTN_SALDO = "Ver saldo";
     public static final String BTN_CARGAR = "Cargar saldo";
     public static final String BTN_AGREGAR = "Agregar cliente";
+    public static final String BTN_LISTAR = "Listar clientes";
 
     // atributos o relacion
     private JButton btnSaldo;
     private JButton btnCargar;
     private JButton btnAgregar;
+    private JButton btnListar;
 
     //Interfaz
     private Interfaz interfaz;
@@ -34,26 +36,29 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
         btnSaldo = new JButton(BTN_SALDO);
         btnCargar = new JButton(BTN_CARGAR);
         btnAgregar = new JButton(BTN_AGREGAR);
+        btnListar = new JButton(BTN_LISTAR);
 
         //se modifican las propiedades (opcional)
         btnSaldo.setActionCommand(BTN_SALDO);
         btnCargar.setActionCommand(BTN_CARGAR);
         btnAgregar.setActionCommand(BTN_AGREGAR);
+        btnListar.setActionCommand(BTN_LISTAR);
 
         btnCargar.addActionListener(this);
         btnSaldo.addActionListener(this);
         btnAgregar.addActionListener(this);
-
+        btnListar.addActionListener(this);
 
         //se agregan
         add(btnSaldo);
         add(btnCargar);
         add(btnAgregar);
+        add(btnListar);
     }
 
     public void agregarCliente() {
         String nombre = JOptionPane.showInputDialog("Digite el nombre del cliente");
-            if (nombre != null && !nombre.equalsIgnoreCase("")){
+            if (nombre != null && !nombre.trim().equalsIgnoreCase("")){
                 if (interfaz.addOwner(nombre)){
                     JOptionPane.showMessageDialog(interfaz, "Se agrego el usuario");
                 }
@@ -65,6 +70,13 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
                     JOptionPane.showMessageDialog(interfaz, "Revisa los datos");
             }
     }
+
+    public void listarOwners(){
+        JOptionPane.showMessageDialog(interfaz, interfaz.listarOwners(), "Listado de clientes", JOptionPane.PLAIN_MESSAGE);
+    }
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -77,6 +89,9 @@ public class PanelDeOpciones extends JPanel implements ActionListener{
         }
         else if (e.getActionCommand().equals(btnAgregar.getActionCommand())){
             agregarCliente();
+        }
+        else if (e.getActionCommand().equals(BTN_LISTAR)){
+            listarOwners();
         }
     }
 
