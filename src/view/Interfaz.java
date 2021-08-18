@@ -29,7 +29,7 @@ public class Interfaz extends JFrame{
 
         //agregar
         add(panelOpciones, BorderLayout.SOUTH);
-        add(panelOwners,BorderLayout.WEST);
+        add(panelOwners,BorderLayout.CENTER);
     }
 
     public boolean addOwner(String nombre) {
@@ -40,9 +40,14 @@ public class Interfaz extends JFrame{
         return control.listarOwners();
     }
     
+    public void updateList() {
+        panelOwners.updateList(control.getDataOwners());;
+        
+    }
 public static void main(String[] args) {
     Interfaz inter = new Interfaz();
     inter.setVisible(true);
+
 }
 }
 
