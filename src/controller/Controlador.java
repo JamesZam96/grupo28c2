@@ -1,5 +1,6 @@
 package controller;
 import model.Owner;
+import services.JavaMySQL;
 
 import java.util.ArrayList;
 
@@ -8,9 +9,12 @@ import java.util.ArrayList;
 
 ;public class Controlador {
     private ArrayList<Owner> owners;
+    private JavaMySQL serviceDB;
+
     public Controlador() {
         super();
         owners = new ArrayList<>(); 
+        serviceDB = new JavaMySQL();
     }
 
     public ArrayList<Owner> getOwners() {
